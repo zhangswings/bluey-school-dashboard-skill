@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1167b1">
+  <title>布鲁伊的一年级学习日</title>
+  <link rel="icon" href="assets/bluey-school-friends.png">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <div class="sky-decor" aria-hidden="true">
+    <span class="sun"></span><span class="cloud cloud-one"></span><span class="cloud cloud-two"></span>
+    <span class="bubble bubble-one"></span><span class="bubble bubble-two"></span><span class="paw">● ●<br>●</span>
+  </div>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">一年级 · 快乐学习每一天</p>
+      <h1>布鲁伊的一年级学习日</h1>
+      <p class="hero-note">看清今天的安排，带着好心情出发！</p>
+      <div class="clock-board" aria-label="当前日期和时间">
+        <div><span id="current-date">正在读取日期</span><span id="current-weekday">星期</span></div>
+        <time id="current-time" datetime="">--:--:--</time>
+      </div>
+    </div>
+    <img class="friends" src="assets/bluey-school-friends.png" alt="布鲁伊和宾果开心地准备上学">
+  </header>
+
+  <main id="main-content">
+    <section class="dashboard" aria-label="今日学习仪表盘">
+      <article class="dash-card weather-card" id="weather-card">
+        <div class="card-heading">
+          <div><p class="card-kicker">天气小站</p><h2>本地天气</h2></div>
+          <span class="weather-icon" id="weather-icon" aria-hidden="true">⛅</span>
+        </div>
+        <p id="weather-status" class="status-line" role="status" aria-live="polite">正在获取实时天气…</p>
+        <div id="weather-content" class="weather-content">
+          <strong id="weather-temperature" class="temperature">--°</strong>
+          <span id="weather-description">天气加载中</span>
+          <dl class="weather-details">
+            <div><dt>体感</dt><dd id="apparent-temperature">--°</dd></div>
+            <div><dt>最高</dt><dd id="high-temperature">--°</dd></div>
+            <div><dt>最低</dt><dd id="low-temperature">--°</dd></div>
+          </dl>
+        </div>
+        <div id="tomorrow-weather" class="tomorrow-weather">
+          <span class="tomorrow-label">明日</span>
+          <span id="tomorrow-icon" class="tomorrow-icon" aria-hidden="true">⛅</span>
+          <strong id="tomorrow-description">预报加载中</strong>
+          <span id="tomorrow-high-low">--° / --°</span>
+        </div>
+        <button class="small-button" id="weather-retry" type="button" hidden>重新获取天气</button>
+      </article>
+
+      <article class="dash-card courses-card">
+        <div class="card-heading"><div><p class="card-kicker">今日课单</p><h2>今天的课程</h2></div><span aria-hidden="true" class="card-emoji">🎒</span></div>
+        <ol id="today-courses" class="today-courses"><li class="empty-state">正在整理今天的课程…</li></ol>
+      </article>
+
+      <article class="dash-card progress-card">
+        <div class="card-heading"><div><p class="card-kicker">学习进度</p><h2>现在到哪一步？</h2></div><span aria-hidden="true" class="card-emoji">⏰</span></div>
+        <p id="progress-title" class="progress-title">正在确认当前安排…</p>
+        <p id="progress-detail" class="muted">请稍候</p>
+        <div class="next-box"><span>下一项</span><strong id="next-item">--</strong></div>
+      </article>
+
+      <article class="dash-card reminder-card">
+        <div class="card-heading"><div><p class="card-kicker">别忘记哦</p><h2>今日提醒</h2></div><span aria-hidden="true" class="card-emoji">⭐</span></div>
+        <ul id="reminder-list" class="reminder-list"><li>正在准备今天的提醒…</li></ul>
+      </article>
+    </section>
+
+    <section class="schedule-section" aria-labelledby="schedule-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">完整安排</p><h2 id="schedule-title">我的时间与课程表</h2></div>
+        <button id="print-button" class="print-button" type="button">打印当前表格</button>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="选择要查看的表格">
+        <button id="tab-opening" class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="panel-opening" data-tab="opening" data-tab-target="panel-opening">10 月 1 日前作息</button>
+        <button id="tab-normal" class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-normal" data-tab="normal" data-tab-target="panel-normal" tabindex="-1">正常作息时间</button>
+        <button id="tab-courses" class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-courses" data-tab="courses" data-tab-target="panel-courses" tabindex="-1">完整课程表</button>
+      </div>
+
+      <section id="panel-opening" class="table-panel active" role="tabpanel" aria-labelledby="tab-opening" data-panel="opening">
+        <div class="table-title"><div><span class="table-badge">9 月</span><h3>一年级作息时间</h3></div><p>10 月 1 日前执行 · 请按学校最新通知为准</p></div>
+        <div class="table-scroll" tabindex="0" aria-label="10月1日前作息表，可横向滚动">
+          <table id="opening-schedule-table">
+            <caption>10 月 1 日前一年级作息时间</caption>
+            <thead><tr><th scope="col">时段</th><th scope="col">时间</th><th scope="col">安排</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">早上</th><td>7:50 - 8:00</td><td>到校 · 做好课前准备</td></tr>
+              <tr><th scope="row">上午</th><td>8:00 - 11:10</td><td>上三节课</td></tr>
+              <tr><th scope="row">午间</th><td>14:40 - 14:50</td><td>返校 · 安静入班</td></tr>
+              <tr><th scope="row">下午</th><td>14:50 - 16:10</td><td>上两节课</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-reminder"><span aria-hidden="true">★</span> 周一举行升旗仪式，请穿校服；少先队员佩戴红领巾。</p>
+      </section>
+
+      <section id="panel-normal" class="table-panel" role="tabpanel" aria-labelledby="tab-normal" data-panel="normal" hidden>
+        <div class="table-title"><div><span class="table-badge">全年</span><h3>一年级正常作息时间</h3></div><p>夏秋季 / 冬春季</p></div>
+        <div class="table-scroll" tabindex="0" aria-label="正常作息表，可横向滚动">
+          <table id="normal-schedule-table">
+            <caption>一年级夏秋季与冬春季正常作息时间</caption>
+            <thead><tr><th scope="col">时段</th><th scope="col">内容</th><th scope="col">夏秋季</th><th scope="col">冬春季</th></tr></thead>
+            <tbody>
+              <tr><td>上午</td><th scope="row">预备</th><td>8:10</td><td>8:10</td></tr>
+              <tr><td>上午</td><th scope="row">第一节</th><td>8:20 - 9:00</td><td>8:20 - 9:00</td></tr>
+              <tr><td>上午</td><th scope="row">第二节</th><td>9:10 - 9:50</td><td>9:10 - 9:50</td></tr>
+              <tr><td>上午</td><th scope="row">大课间</th><td>9:50 - 10:20</td><td>9:50 - 10:20</td></tr>
+              <tr><td>上午</td><th scope="row">第三节</th><td>10:20 - 10:55</td><td>10:20 - 10:55</td></tr>
+              <tr><td>上午</td><th scope="row">第四节</th><td>11:05 - 11:40</td><td>11:05 - 11:40</td></tr>
+              <tr><td>下午</td><th scope="row">预备</th><td>14:50</td><td>14:20</td></tr>
+              <tr><td>下午</td><th scope="row">第五节</th><td>15:00 - 15:30</td><td>14:30 - 15:00</td></tr>
+              <tr><td>下午</td><th scope="row">第六节</th><td>15:40 - 16:10</td><td>15:10 - 15:40</td></tr>
+              <tr><td>下午</td><th scope="row">大课间</th><td>16:10 - 16:40</td><td>15:40 - 16:10</td></tr>
+              <tr><td>延时</td><th scope="row">第七节</th><td>16:40 - 17:10</td><td>16:10 - 16:40</td></tr>
+              <tr><td>延时</td><th scope="row">第八节</th><td>17:20 - 17:50</td><td>16:50 - 17:20</td></tr>
+              <tr><td>延时</td><th scope="row">第九节</th><td>18:00 - 18:30</td><td>17:30 - 18:00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tip-strip"><strong>温馨提醒：</strong>早上进班 7:50 - 8:00 · 中午进班 14:40 - 14:50 · 中午放学 11:40 · 下午放学 17:40</div>
+      </section>
+
+      <section id="panel-courses" class="table-panel" role="tabpanel" aria-labelledby="tab-courses" data-panel="courses" hidden>
+        <div class="table-title"><div><span class="table-badge">每周</span><h3>一年级课程表</h3></div><p>课程以老师最新通知为准</p></div>
+        <div class="table-scroll" tabindex="0" aria-label="完整课程表，可横向滚动">
+          <table id="course-schedule-table">
+            <caption>一年级星期一至星期五课程表</caption>
+            <thead><tr><th scope="col">节次</th><th scope="col">星期一</th><th scope="col">星期二</th><th scope="col">星期三</th><th scope="col">星期四</th><th scope="col">星期五</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">第一节</th><td>语文</td><td>数学</td><td>语文</td><td>数学</td><td>语文</td></tr>
+              <tr><th scope="row">第二节</th><td>数学</td><td>语文</td><td>数学</td><td>语文</td><td>数学</td></tr>
+              <tr><th scope="row">第三节</th><td>道德与法治</td><td>语文</td><td>艺术<br>音乐</td><td>语文</td><td>语文</td></tr>
+              <tr><th scope="row">第四节</th><td>阅读</td><td>科学</td><td>口语</td><td>体育与健康</td><td>艺术<br>美术</td></tr>
+              <tr><th scope="row">第五节</th><td>写字</td><td>艺术<br>音乐</td><td>体育与健康</td><td>道德与法治</td><td>体育与健康</td></tr>
+              <tr><th scope="row">第六节</th><td>体育与健康</td><td>数学</td><td>科学</td><td>艺术<br>美术</td><td>班队会<br>心理健康</td></tr>
+              <tr class="extension-start"><th scope="row">延时一</th><td>特长</td><td>数学</td><td>语文</td><td>数学</td><td>语文</td></tr>
+              <tr><th scope="row">延时二</th><td>特长</td><td>语文</td><td>数学</td><td>语文</td><td>数学</td></tr>
+              <tr><th scope="row">延时三</th><td>诵读</td><td>诵读</td><td>诵读</td><td>诵读</td><td>诵读</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer><span aria-hidden="true">🐾</span> 认真学习，也要记得开心玩耍！</footer>
+</body>
+</html>
