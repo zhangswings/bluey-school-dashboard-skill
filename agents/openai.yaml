@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bluey School Dashboard"
+  short_description: "Build friendly school schedule dashboards"
+  default_prompt: "Create a responsive local school schedule dashboard with live date/time, configurable weather, course tables, H5/WebView support, and print output."
